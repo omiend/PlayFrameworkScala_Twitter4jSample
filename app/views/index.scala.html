@@ -1,7 +1,15 @@
-@(message: String)
+@(twitterUser: Option[twitter4j.User])
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message)
-
+  @twitterUser match {
+    case Some(user) => {
+    	&#64;@user.getScreenName<br/>
+    	<img src="@user.getProfileImageURL"/><br/>
+    	<a href="/twitterLogout">Logout</a>
+    }
+    case _ => {
+      <a href="/twitterLogin">Login</a>
+    }
+  }
 }
